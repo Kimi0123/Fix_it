@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicTextFieldUI;
-import swing.shadow.ShadowRenderer;
+import util.ShadowRenderer;
 
 public class TextField extends JTextField {
 
@@ -17,10 +17,17 @@ public class TextField extends JTextField {
     private Color shadowColor = new Color(170, 170, 170);
     private BufferedImage imageShadow;
     private final Insets shadowSize = new Insets(2, 5, 8, 5);
-    private String placeholder = "example@gmail.com";
+    private String placeholder = "Enter Your Answer";
     private boolean showingPlaceholder = true;
 
+    // Constructor with default placeholder
     public TextField() {
+        this("Enter Your Answer");
+    }
+
+    // Constructor to accept a custom placeholder
+    public TextField(String placeholder) {
+        this.placeholder = placeholder; // Set the custom placeholder
         setUI(new TextUI());
         setOpaque(false);
         setForeground(new Color(80, 80, 80));
@@ -30,8 +37,7 @@ public class TextField extends JTextField {
         setBackground(new Color(255, 255, 255));
 
         // Initialize with the placeholder text
-        setText(placeholder);
-        setForeground(Color.GRAY);
+        setPlaceholderVisible(true);
 
         // Add focus listener to manage placeholder
         addFocusListener(new FocusListener() {
@@ -47,12 +53,36 @@ public class TextField extends JTextField {
             @Override
             public void focusLost(FocusEvent e) {
                 if (getText().isEmpty()) {
-                    setText(placeholder);
-                    setForeground(Color.GRAY);
-                    showingPlaceholder = true;
+                    setPlaceholderVisible(true);
                 }
             }
         });
+    }
+
+    // Helper method to show/hide the placeholder
+    private void setPlaceholderVisible(boolean visible) {
+        showingPlaceholder = visible;
+        if (visible) {
+            setText(placeholder);
+            setForeground(Color.GRAY);
+        } else {
+            setText("");
+            setForeground(new Color(80, 80, 80));
+        }
+    }
+
+    // Getter and Setter for placeholder
+    public String getPlaceholder() {
+        return placeholder;
+    }
+
+    public void setPlaceholder(String placeholder) {
+        this.placeholder = placeholder;
+
+        // If currently showing the placeholder, update the text immediately
+        if (showingPlaceholder) {
+            setText(placeholder);
+        }
     }
 
     public int getRound() {

@@ -1,4 +1,4 @@
-package swing.shadow;
+package util;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;

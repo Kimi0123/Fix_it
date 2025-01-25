@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicPasswordFieldUI;
-import swing.shadow.ShadowRenderer;
+import util.ShadowRenderer;
 
 public class PasswordField extends JPasswordField {
     private static final int DEFAULT_ROUND = 10;
@@ -26,6 +26,7 @@ public class PasswordField extends JPasswordField {
     private boolean hide = true; // For toggling password visibility
     private final Image eye; // Eye icon for show
     private final Image eyeHide; // Eye icon for hide
+    private String placeholder = "Enter your password"; // Default placeholder
 
     public PasswordField() {
         setUI(new CustomPasswordFieldUI());
@@ -38,19 +39,20 @@ public class PasswordField extends JPasswordField {
 
         eye = new ImageIcon(getClass().getResource("/Image/eye.png")).getImage(); // Path to the eye icon
         eyeHide = new ImageIcon(getClass().getResource("/Image/eye_hide.png")).getImage(); // Path to the hidden eye icon
+
         addMouseMotionListener(new MouseAdapter() {
-    @Override
-    public void mouseMoved(MouseEvent me) {
-        int x = getWidth() - 30;
-        if (new java.awt.Rectangle(x, 0, 30, 30).contains(me.getPoint())) {
-            setCursor(new Cursor(Cursor.HAND_CURSOR)); // Change cursor to hand when over the icon
-            setToolTipText(hide ? "Show Password" : "Hide Password"); // Set tooltip based on state
-        } else {
-            setCursor(new Cursor(Cursor.TEXT_CURSOR)); // Reset cursor
-            setToolTipText(null); // Remove tooltip when not hovering over the icon
-        }
-    }
-     });           
+            @Override
+            public void mouseMoved(MouseEvent me) {
+                int x = getWidth() - 30;
+                if (new java.awt.Rectangle(x, 0, 30, 30).contains(me.getPoint())) {
+                    setCursor(new Cursor(Cursor.HAND_CURSOR)); // Change cursor to hand when over the icon
+                    setToolTipText(hide ? "Show Password" : "Hide Password"); // Set tooltip based on state
+                } else {
+                    setCursor(new Cursor(Cursor.TEXT_CURSOR)); // Reset cursor
+                    setToolTipText(null); // Remove tooltip when not hovering over the icon
+                }
+            }
+        });
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -63,19 +65,6 @@ public class PasswordField extends JPasswordField {
             }
         });
 
-        addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent me) {
-                int x = getWidth() - 30;
-                if (new java.awt.Rectangle(x, 0, 30, 30).contains(me.getPoint())) {
-                    setCursor(new Cursor(Cursor.HAND_CURSOR)); // Change cursor to hand when over the icon
-                } else {
-                    setCursor(new Cursor(Cursor.TEXT_CURSOR)); // Reset cursor
-                }
-            }
-        });
-
-        // Add a FocusListener to repaint when the focus changes
         addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -87,6 +76,15 @@ public class PasswordField extends JPasswordField {
                 repaint();
             }
         });
+    }
+
+    public String getPlaceholder() {
+        return placeholder;
+    }
+
+    public void setPlaceholder(String placeholder) {
+        this.placeholder = placeholder;
+        repaint(); // Repaint to reflect the updated placeholder
     }
 
     @Override
@@ -114,7 +112,7 @@ public class PasswordField extends JPasswordField {
         // Draw placeholder text if the field is empty and unfocused
         if (getPassword().length == 0 && !isFocusOwner()) {
             g2.setColor(Color.GRAY);
-            g2.drawString("Enter your password", getInsets().left, getHeight() / 2 + getFont().getSize() / 2 - 2);
+            g2.drawString(placeholder, getInsets().left, getHeight() / 2 + getFont().getSize() / 2 - 2);
         }
 
         // Draw Password or Plain Text
@@ -122,10 +120,8 @@ public class PasswordField extends JPasswordField {
         g2.setColor(getForeground());
         String text = new String(getPassword());
         if (!hide) {
-            // Show plain text
             g2.drawString(text, getInsets().left, getHeight() / 2 + getFont().getSize() / 2 - 2);
         } else {
-            // Show dots or stars
             String echoText = "●".repeat(text.length());
             g2.drawString(echoText, getInsets().left, getHeight() / 2 + getFont().getSize() / 2 - 2);
         }
@@ -181,5 +177,4 @@ public class PasswordField extends JPasswordField {
             // Do not paint default background
         }
     }
-    
 }

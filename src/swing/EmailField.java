@@ -1,22 +1,59 @@
 package swing;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.RenderingHints;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.geom.Area;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
-import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicTextFieldUI;
 import util.ShadowRenderer;
-import util.RippleEffect;
 
-public class Button extends JButton {
+public class EmailField extends JTextField {
+
+    private int round = 10;
+    private Color shadowColor = new Color(170, 170, 170);
+    private BufferedImage imageShadow;
+    private final Insets shadowSize = new Insets(2, 5, 8, 5);
+    private String placeholder = "example@gmail.com";
+    private boolean showingPlaceholder = true;
+
+    public EmailField() {
+        setUI(new TextUI());
+        setOpaque(false);
+        setForeground(new Color(80, 80, 80));
+        setSelectedTextColor(new Color(255, 255, 255));
+        setSelectionColor(new Color(133, 209, 255));
+        setBorder(new EmptyBorder(10, 12, 15, 12));
+        setBackground(new Color(255, 255, 255));
+
+        // Initialize with the placeholder text
+        setText(placeholder);
+        setForeground(Color.GRAY);
+
+        // Add focus listener to manage placeholder
+        addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (showingPlaceholder) {
+                    setText("");
+                    setForeground(new Color(80, 80, 80));
+                    showingPlaceholder = false;
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (getText().isEmpty()) {
+                    setText(placeholder);
+                    setForeground(Color.GRAY);
+                    showingPlaceholder = true;
+                }
+            }
+        });
+    }
 
     public int getRound() {
         return round;
@@ -38,43 +75,6 @@ public class Button extends JButton {
         repaint();
     }
 
-    public void setRippleColor(Color color) {
-        rippleEffect.setRippleColor(color);
-    }
-
-    public Color getRippleColor() {
-        return rippleEffect.getRippleColor();
-    }
-
-    private int round = 10;
-    private Color shadowColor = new Color(170, 170, 170);
-    private BufferedImage imageShadow;
-    private final Insets shadowSize = new Insets(2, 5, 8, 5);
-    private final RippleEffect rippleEffect = new RippleEffect(this);
-
-    public Button() {
-        setBorder(new EmptyBorder(10, 12, 15, 12));
-        setContentAreaFilled(false);
-        setBackground(new Color(255, 255, 255));
-        setForeground(new Color(80, 80, 80));
-        rippleEffect.setRippleColor(new Color(220, 220, 220));
-
-        // Add MouseListener for cursor change
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // Change cursor to hand cursor when hovering over the button
-                setCursor(new Cursor(Cursor.HAND_CURSOR));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                // Reset cursor to default when the mouse exits the button
-                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            }
-        });
-    }
-
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
@@ -83,13 +83,19 @@ public class Button extends JButton {
         double height = getHeight() - (shadowSize.top + shadowSize.bottom);
         double x = shadowSize.left;
         double y = shadowSize.top;
+
         // Create Shadow Image
         g2.drawImage(imageShadow, 0, 0, null);
+
         // Create Background Color
         g2.setColor(getBackground());
         Area area = new Area(new RoundRectangle2D.Double(x, y, width, height, round, round));
         g2.fill(area);
-        rippleEffect.reder(grphcs, area);
+
+        // Add Grey Border
+        g2.setColor(Color.GRAY);
+        g2.draw(new RoundRectangle2D.Double(x, y, width, height, round, round));
+
         g2.dispose();
         super.paintComponent(grphcs);
     }
@@ -108,7 +114,7 @@ public class Button extends JButton {
             Graphics2D g2 = imageShadow.createGraphics();
             BufferedImage img = createShadow();
             if (img != null) {
-                g2.drawImage(createShadow(), 0, 0, null);
+                g2.drawImage(img, 0, 0, null);
             }
             g2.dispose();
         }
@@ -123,9 +129,16 @@ public class Button extends JButton {
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.fill(new RoundRectangle2D.Double(0, 0, width, height, round, round));
             g2.dispose();
-            return new ShadowRenderer(5, 0.3f, shadowColor).createShadow(img);
+            return new ShadowRenderer(5, 0.3f, new Color(255, 192, 203)).createShadow(img); // Pink shadow
         } else {
             return null;
+        }
+    }
+
+    private class TextUI extends BasicTextFieldUI {
+        @Override
+        protected void paintBackground(Graphics grphcs) {
+            // Do not paint default background
         }
     }
 }

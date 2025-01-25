@@ -1,6 +1,6 @@
 package swing;
 
-import swing.shadow.ShadowRenderer;
+import util.ShadowRenderer;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.JLayeredPane;
