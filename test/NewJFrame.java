@@ -25,235 +25,55 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        slide = new swing.PanelSlide();
-        jLabel2 = new javax.swing.JLabel();
-        btnSignIn = new swing.Button();
-        txtPassword = new swing.PasswordField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        btnDashBoard = new swing.Button();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        emailField1 = new swing.EmailField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        txtPassword1 = new swing.PasswordField();
-        jLabel9 = new javax.swing.JLabel();
-        textField2 = new swing.TextField();
-        textField5 = new swing.TextField();
-        textField3 = new swing.TextField();
-        textField6 = new swing.TextField();
-        textField7 = new swing.TextField();
+        txtQuestion2 = new swing.TextField();
+        btnBack = new swing.Button();
+        btnSubmit = new swing.Button();
+        lblSecurityQuestions = new javax.swing.JLabel();
+        lblQuestion2 = new javax.swing.JLabel();
+        lblQuestion1 = new javax.swing.JLabel();
+        txtQuestion1 = new swing.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+        getContentPane().add(txtQuestion2);
+        txtQuestion2.setBounds(30, 200, 300, 41);
 
-        slide.setBackground(new java.awt.Color(255, 255, 255));
-        slide.setLayout(null);
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/back.png"))); // NOI18N
+        btnBack.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBack.setRound(90);
+        getContentPane().add(btnBack);
+        btnBack.setBounds(70, 270, 30, 30);
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(54, 66, 81));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("User SignUp");
-        slide.add(jLabel2);
-        jLabel2.setBounds(110, 40, 230, 48);
+        btnSubmit.setBackground(new java.awt.Color(4, 14, 143));
+        btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
+        btnSubmit.setText("Submit");
+        btnSubmit.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        getContentPane().add(btnSubmit);
+        btnSubmit.setBounds(120, 260, 120, 50);
 
-        btnSignIn.setBackground(new java.awt.Color(35, 39, 153));
-        btnSignIn.setForeground(new java.awt.Color(255, 255, 255));
-        btnSignIn.setText("Sign In");
-        btnSignIn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSignInActionPerformed(evt);
-            }
-        });
-        slide.add(btnSignIn);
-        btnSignIn.setBounds(180, 530, 129, 60);
+        lblSecurityQuestions.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblSecurityQuestions.setForeground(new java.awt.Color(255, 255, 255));
+        lblSecurityQuestions.setText("Security Questions");
+        getContentPane().add(lblSecurityQuestions);
+        lblSecurityQuestions.setBounds(30, 10, 320, 50);
 
-        txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
-            }
-        });
-        slide.add(txtPassword);
-        txtPassword.setBounds(40, 370, 390, 55);
+        lblQuestion2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblQuestion2.setForeground(new java.awt.Color(255, 255, 255));
+        lblQuestion2.setText("2. What is your favorite number?");
+        getContentPane().add(lblQuestion2);
+        lblQuestion2.setBounds(20, 170, 250, 22);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setText("Password :");
-        slide.add(jLabel3);
-        jLabel3.setBounds(50, 340, 90, 25);
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setText("First Name :");
-        slide.add(jLabel4);
-        jLabel4.setBounds(50, 100, 94, 25);
-
-        btnDashBoard.setBackground(new java.awt.Color(123, 26, 7));
-        btnDashBoard.setForeground(new java.awt.Color(255, 255, 255));
-        btnDashBoard.setText("DashBoard");
-        btnDashBoard.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnDashBoard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDashBoardActionPerformed(evt);
-            }
-        });
-        slide.add(btnDashBoard);
-        btnDashBoard.setBounds(420, 10, 110, 41);
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setText("Last Name :");
-        slide.add(jLabel6);
-        jLabel6.setBounds(290, 100, 94, 25);
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setText("Email :");
-        slide.add(jLabel7);
-        jLabel7.setBounds(50, 180, 94, 25);
-
-        emailField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        slide.add(emailField1);
-        emailField1.setBounds(40, 210, 400, 50);
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setText("Gender :");
-        slide.add(jLabel5);
-        jLabel5.setBounds(280, 260, 110, 25);
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel8.setText("Contact No. :");
-        slide.add(jLabel8);
-        jLabel8.setBounds(50, 260, 110, 25);
-
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MALE", "FEMALE" }));
-        slide.add(jComboBox1);
-        jComboBox1.setBounds(280, 290, 150, 50);
-
-        txtPassword1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtPassword1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPassword1ActionPerformed(evt);
-            }
-        });
-        slide.add(txtPassword1);
-        txtPassword1.setBounds(40, 460, 390, 55);
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel9.setText("Confirm Password :");
-        slide.add(jLabel9);
-        jLabel9.setBounds(50, 430, 160, 25);
-
-        textField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textField2.setPlaceholder("Enter Your Last Name");
-        textField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField2ActionPerformed(evt);
-            }
-        });
-        slide.add(textField2);
-        textField2.setBounds(280, 130, 160, 50);
-
-        textField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textField5.setPlaceholder("+977 98XXXXXXXX");
-        textField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField5ActionPerformed(evt);
-            }
-        });
-        slide.add(textField5);
-        textField5.setBounds(40, 290, 180, 50);
-
-        textField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textField3.setPlaceholder("Enter Your Last Name");
-        textField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField3ActionPerformed(evt);
-            }
-        });
-        slide.add(textField3);
-        textField3.setBounds(280, 130, 160, 50);
-
-        textField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textField6.setPlaceholder("Enter Your First Name");
-        textField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField6ActionPerformed(evt);
-            }
-        });
-        slide.add(textField6);
-        textField6.setBounds(40, 130, 160, 50);
-
-        textField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textField7.setPlaceholder("Enter Your First Name");
-        textField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField7ActionPerformed(evt);
-            }
-        });
-        slide.add(textField7);
-        textField7.setBounds(40, 130, 160, 50);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(slide, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(slide, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        lblQuestion1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblQuestion1.setForeground(new java.awt.Color(255, 255, 255));
+        lblQuestion1.setText("1. What is your date of birth?");
+        getContentPane().add(lblQuestion1);
+        lblQuestion1.setBounds(20, 90, 220, 22);
+        getContentPane().add(txtQuestion1);
+        txtQuestion1.setBounds(30, 120, 300, 41);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSignInActionPerformed
-
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
-
-    private void btnDashBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashBoardActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDashBoardActionPerformed
-
-    private void txtPassword1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassword1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPassword1ActionPerformed
-
-    private void textField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField2ActionPerformed
-
-    private void textField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField5ActionPerformed
-
-    private void textField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField3ActionPerformed
-
-    private void textField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField6ActionPerformed
-
-    private void textField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textField7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,25 +111,12 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private swing.Button btnDashBoard;
-    private swing.Button btnSignIn;
-    private swing.EmailField emailField1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private swing.PanelSlide slide;
-    private swing.TextField textField2;
-    private swing.TextField textField3;
-    private swing.TextField textField5;
-    private swing.TextField textField6;
-    private swing.TextField textField7;
-    private swing.PasswordField txtPassword;
-    private swing.PasswordField txtPassword1;
+    private swing.Button btnBack;
+    private swing.Button btnSubmit;
+    private javax.swing.JLabel lblQuestion1;
+    private javax.swing.JLabel lblQuestion2;
+    private javax.swing.JLabel lblSecurityQuestions;
+    private swing.TextField txtQuestion1;
+    private swing.TextField txtQuestion2;
     // End of variables declaration//GEN-END:variables
 }

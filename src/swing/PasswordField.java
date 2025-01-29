@@ -15,11 +15,10 @@ import javax.swing.plaf.basic.BasicPasswordFieldUI;
 import util.ShadowRenderer;
 
 public class PasswordField extends JPasswordField {
-    private static final int DEFAULT_ROUND = 10;
+    private int round = 50; // Corner roundness
     private static final Color DEFAULT_SHADOW_COLOR = new Color(255, 192, 203); // Pink shadow
     private static final Insets DEFAULT_SHADOW_SIZE = new Insets(2, 5, 8, 5);
 
-    private final int round = DEFAULT_ROUND;
     private final Color shadowColor = DEFAULT_SHADOW_COLOR;
     private BufferedImage imageShadow;
 
@@ -43,7 +42,7 @@ public class PasswordField extends JPasswordField {
         addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseMoved(MouseEvent me) {
-                int x = getWidth() - 30;
+                int x = getWidth() - 50; // Adjusted for left positioning
                 if (new java.awt.Rectangle(x, 0, 30, 30).contains(me.getPoint())) {
                     setCursor(new Cursor(Cursor.HAND_CURSOR)); // Change cursor to hand when over the icon
                     setToolTipText(hide ? "Show Password" : "Hide Password"); // Set tooltip based on state
@@ -57,7 +56,7 @@ public class PasswordField extends JPasswordField {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
-                int x = getWidth() - 30;
+                int x = getWidth() - 40; // Adjusted for left positioning
                 if (new java.awt.Rectangle(x, 0, 30, 30).contains(me.getPoint())) {
                     hide = !hide; // Toggle visibility
                     repaint();
@@ -85,6 +84,15 @@ public class PasswordField extends JPasswordField {
     public void setPlaceholder(String placeholder) {
         this.placeholder = placeholder;
         repaint(); // Repaint to reflect the updated placeholder
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
+        repaint();
     }
 
     @Override
@@ -127,8 +135,8 @@ public class PasswordField extends JPasswordField {
         }
 
         // Draw Show/Hide Eye Icon
-        int eyeX = getWidth() - 30;
-        int eyeY = (getHeight() - 20) / 2;
+        int eyeX = getWidth() - 40; // Shifted 10px to the left
+        int eyeY = (getHeight() - 20) / 2; // Centered vertically
         g2.drawImage(hide ? eyeHide : eye, eyeX, eyeY, null); // Draw appropriate eye icon
 
         g2.dispose();

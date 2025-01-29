@@ -2,36 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Design;
+package mvc.View;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import javax.swing.ImageIcon;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import swing.RippleEffectLabel;
-import util.ImageUtils;
 import swing.RoundedBorder;
 
 /**
  *
  * @author Legion
  */
-public class Main_user extends javax.swing.JFrame {
-
+public class UserLogin extends javax.swing.JFrame {
+     private Point initialClick;
+   
     /**
      * Creates new form Login
      */
-    public Main_user() {
+    public UserLogin() {
         initComponents();
         jLabel1.setVisible(false);
         jLabel2.setVisible(false);
-        jLabel4.setVisible(false);
-        
-        
-        
-   
-        
+        btnSignup.setVisible(false);
+        makeDraggable();
+       
     }
 
     /**
@@ -51,18 +48,23 @@ public class Main_user extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         slide = new swing.PanelSlide();
         jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblUserLogin = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
         txtEmail = new swing.TextField();
-        jLabel7 = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
         txtPassword = new swing.PasswordField();
         btnSignIn = new swing.Button();
-        jLabel8 = new javax.swing.JLabel();
+        lblForgotPassword = new javax.swing.JLabel();
         lblClickHere = new javax.swing.JLabel();
         btnDashBoard = new swing.Button();
+        titleBar = new javax.swing.JPanel();
+        btnClose = new javax.swing.JLabel();
+        btnMinimize = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(900, 500));
+        setUndecorated(true);
 
         panelGradiente1.setColorPrimario(new java.awt.Color(153, 153, 255));
         panelGradiente1.setColorSecundario(new java.awt.Color(204, 204, 255));
@@ -72,14 +74,6 @@ public class Main_user extends javax.swing.JFrame {
 
         slidehover.setBackground(new java.awt.Color(255, 255, 255));
         slidehover.setOpaque(false);
-        slidehover.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                slidehoverMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                slidehoverMouseExited(evt);
-            }
-        });
         slidehover.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -95,28 +89,36 @@ public class Main_user extends javax.swing.JFrame {
         slidehover.add(jLabel2);
         jLabel2.setBounds(10, 210, 420, 27);
 
-        jLabel4 = new RippleEffectLabel("Sign Up");
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 20)); // You can adjust the font as needed
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255)); // Text color
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setBorder(new RoundedBorder(40, Color.WHITE, 2)); // Rounded border as in your original code
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSignup = new RippleEffectLabel("Sign Up");
+        btnSignup.setFont(new java.awt.Font("Segoe UI", 1, 20)); // You can adjust the font as needed
+        btnSignup.setForeground(new java.awt.Color(255, 255, 255)); // Text color
+        btnSignup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnSignup.setBorder(new RoundedBorder(40, Color.WHITE, 2)); // Rounded border as in your original code
+        btnSignup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        slidehover.add(jLabel4);
-        jLabel4.setBounds(120, 300, 180, 50);
+        slidehover.add(btnSignup);
+        btnSignup.setBounds(150, 350, 160, 60);
 
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSignup.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel4MouseEntered(evt);
+                btnSignupMouseEntered(evt);
             }
 
         });
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSignup.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                btnSignupMouseClicked(evt);
             }
         });
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/UserImg.png"))); // NOI18N
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel3MouseExited(evt);
+            }
+        });
         slidehover.add(jLabel3);
         jLabel3.setBounds(0, 0, 450, 500);
 
@@ -127,24 +129,26 @@ public class Main_user extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(54, 66, 81));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Admin Login");
+        lblUserLogin.setBackground(new java.awt.Color(255, 255, 255));
+        lblUserLogin.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblUserLogin.setForeground(new java.awt.Color(54, 66, 81));
+        lblUserLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUserLogin.setText("User Login");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setText("Email :");
+        lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblEmail.setText("Email :");
 
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtEmail.setPlaceholder("example@gmail.com");
+        txtEmail.setRound(50);
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setText("Password :");
+        lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblPassword.setText("Password :");
 
         txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -156,19 +160,25 @@ public class Main_user extends javax.swing.JFrame {
         btnSignIn.setBackground(new java.awt.Color(35, 39, 153));
         btnSignIn.setForeground(new java.awt.Color(255, 255, 255));
         btnSignIn.setText("Sign In");
-        btnSignIn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSignIn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnSignIn.setRound(50);
         btnSignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSignInActionPerformed(evt);
             }
         });
 
-        jLabel8.setText("Forgot Password?");
+        lblForgotPassword.setText("Forgot Password?");
 
         lblClickHere.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblClickHere.setForeground(new java.awt.Color(39, 35, 153));
         lblClickHere.setText("Click Here");
         lblClickHere.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblClickHere.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblClickHereMouseClicked(evt);
+            }
+        });
 
         btnDashBoard.setBackground(new java.awt.Color(123, 26, 7));
         btnDashBoard.setForeground(new java.awt.Color(255, 255, 255));
@@ -190,20 +200,20 @@ public class Main_user extends javax.swing.JFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addComponent(lblEmail)
                         .addGap(377, 377, 377))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addComponent(lblPassword)
                         .addGap(346, 346, 346))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addComponent(lblForgotPassword)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblClickHere)
                         .addGap(9, 9, 9)))
                 .addGap(0, 44, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(183, 183, 183)
@@ -219,18 +229,18 @@ public class Main_user extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(btnDashBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
-                .addComponent(jLabel5)
+                .addComponent(lblUserLogin)
                 .addGap(22, 22, 22)
-                .addComponent(jLabel6)
+                .addComponent(lblEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(jLabel7)
+                .addComponent(lblPassword)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+                    .addComponent(lblForgotPassword)
                     .addComponent(lblClickHere))
                 .addGap(18, 18, 18)
                 .addComponent(btnSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,23 +267,87 @@ public class Main_user extends javax.swing.JFrame {
         panelBorder1.add(slide);
         slide.setBounds(460, 10, 530, 500);
 
+        titleBar.setBackground(new java.awt.Color(204, 204, 255));
+
+        btnClose.setBackground(new java.awt.Color(204, 204, 255));
+        btnClose.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnClose.setText("x");
+        btnClose.setOpaque(true);
+        btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCloseMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCloseMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCloseMouseExited(evt);
+            }
+        });
+
+        btnMinimize.setBackground(new java.awt.Color(204, 204, 255));
+        btnMinimize.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        btnMinimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnMinimize.setText("-");
+        btnMinimize.setOpaque(true);
+        btnMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMinimizeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMinimizeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMinimizeMouseExited(evt);
+            }
+        });
+
+        jLabel4.setBackground(new java.awt.Color(255, 204, 255));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/userloginicon.png"))); // NOI18N
+        jLabel4.setText("User Login");
+
+        javax.swing.GroupLayout titleBarLayout = new javax.swing.GroupLayout(titleBar);
+        titleBar.setLayout(titleBarLayout);
+        titleBarLayout.setHorizontalGroup(
+            titleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titleBarLayout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        titleBarLayout.setVerticalGroup(
+            titleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         panelGradiente1.setLayer(panelBorder1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panelGradiente1.setLayer(titleBar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panelGradiente1Layout = new javax.swing.GroupLayout(panelGradiente1);
         panelGradiente1.setLayout(panelGradiente1Layout);
         panelGradiente1Layout.setHorizontalGroup(
             panelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiente1Layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+            .addGroup(panelGradiente1Layout.createSequentialGroup()
+                .addGroup(panelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(titleBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelGradiente1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0))
         );
         panelGradiente1Layout.setVerticalGroup(
             panelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiente1Layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
+                .addComponent(titleBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -290,52 +364,30 @@ public class Main_user extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void slidehoverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_slidehoverMouseEntered
-   // Apply the blur effect to the image
-    if (originalImage == null) {
-        originalIcon = (ImageIcon) jLabel3.getIcon();
-        originalImage = new BufferedImage(
-                originalIcon.getIconWidth(),
-                originalIcon.getIconHeight(),
-                BufferedImage.TYPE_INT_ARGB);
-        Graphics g = originalImage.getGraphics();
-        originalIcon.paintIcon(null, g, 0, 0);
-        g.dispose();
-    }
-    
-    BufferedImage blurredAndScaledImage = ImageUtils.blurAndScaleImage(originalImage, 7, 1.01); 
-    blurredIcon = new ImageIcon(blurredAndScaledImage);
-    jLabel3.setIcon(blurredIcon);
-    
-    // Make sure the components are always visible
-    if (!jLabel1.isVisible()) {
-        jLabel1.setVisible(true);
-        jLabel2.setVisible(true);
-        jLabel4.setVisible(true);
-    }
-                                          
-    }//GEN-LAST:event_slidehoverMouseEntered
-
-    private void slidehoverMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_slidehoverMouseExited
-      isMouseInside = false;
-// Delay hiding after mouse exit, 
-    new javax.swing.Timer(200, e -> {
-        if (!isMouseInside) {
-             if (jLabel1.isVisible()) {
-                jLabel1.setVisible(false);
-                jLabel2.setVisible(false);
-                jLabel4.setVisible(false);
-             }
-            // Just restore the original image
-            if (originalIcon != null) {
-                jLabel3.setIcon(originalIcon);
+private void makeDraggable() {
+        // MouseListener for dragging the window
+        titleBar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                initialClick = e.getPoint();  // Store initial click position
             }
-        }
-        ((javax.swing.Timer) e.getSource()).stop(); // Stop the timer after the action
-    }).start();
-    }//GEN-LAST:event_slidehoverMouseExited
-
+        });
+     
+     titleBar.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                // Get the location of the window
+                int x = getLocation().x;
+                int y = getLocation().y;
+                
+                // Calculate how far the mouse has moved and set the new position
+                int deltaX = e.getX() - initialClick.x;
+                int deltaY = e.getY() - initialClick.y;
+                
+                setLocation(x + deltaX, y + deltaY);
+            }
+        });
+    }
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
@@ -351,72 +403,105 @@ public class Main_user extends javax.swing.JFrame {
     private void btnDashBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashBoardActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDashBoardActionPerformed
-private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {    
-    isMouseInside = true;
-    
-    // Apply the blur effect to the image
-    if (originalImage == null) {
-        originalIcon = (ImageIcon) jLabel3.getIcon();
-        originalImage = new BufferedImage(
-                originalIcon.getIconWidth(),
-                originalIcon.getIconHeight(),
-                BufferedImage.TYPE_INT_ARGB);
-        Graphics g = originalImage.getGraphics();
-        originalIcon.paintIcon(null, g, 0, 0);
-        g.dispose();
-    }
-    
-    BufferedImage blurredAndScaledImage = ImageUtils.blurAndScaleImage(originalImage, 7, 1.01); 
-    blurredIcon = new ImageIcon(blurredAndScaledImage);
-    jLabel3.setIcon(blurredIcon);
-    
-    // Make sure the components are always visible
-    if (!jLabel1.isVisible()) {
+
+    private void lblClickHereMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblClickHereMouseClicked
+    // Hide the current window and open Security
+    Security securityWindow = new Security(this); // Pass the current instance
+    securityWindow.setVisible(true); // Show the Security window
+    this.dispose(); // Close the current UserLogin window
+    }//GEN-LAST:event_lblClickHereMouseClicked
+
+    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
+        // TODO add your handling code here:
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/userblur.png")));
         jLabel1.setVisible(true);
         jLabel2.setVisible(true);
-        jLabel4.setVisible(true);
+        btnSignup.setVisible(true);
+    }//GEN-LAST:event_jLabel3MouseEntered
+
+    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
+        // TODO add your handling code here:
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/UserImg.png")));
+        jLabel1.setVisible(false);
+        jLabel2.setVisible(false);
+        btnSignup.setVisible(false);
+        
+    }//GEN-LAST:event_jLabel3MouseExited
+
+    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnCloseMouseClicked
+
+    private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
+        // TODO add your handling code here:
+        btnClose.setBackground(new Color(139, 0, 0));
+    }//GEN-LAST:event_btnCloseMouseEntered
+
+    private void btnCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseExited
+        // TODO add your handling code here:
+        btnClose.setBackground(new Color(204, 204, 255));
+    }//GEN-LAST:event_btnCloseMouseExited
+
+    private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked
+        // TODO add your handling code here:
+        setState(AdminLogin.ICONIFIED);
+    }//GEN-LAST:event_btnMinimizeMouseClicked
+
+    private void btnMinimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseEntered
+        // TODO add your handling code here:
+        btnMinimize.setBackground(new Color(211,211,211));
+    }//GEN-LAST:event_btnMinimizeMouseEntered
+
+    private void btnMinimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseExited
+        // TODO add your handling code here:
+        btnMinimize.setBackground(new Color(204,204,255));
+    }//GEN-LAST:event_btnMinimizeMouseExited
+    
+    private void btnSignupMouseEntered(java.awt.event.MouseEvent evt) {   
+          // TODO add your handling code here:
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/userblur.png")));
+        jLabel1.setVisible(true);
+        jLabel2.setVisible(true);
+        btnSignup.setVisible(true);
+    } 
+    
+     private void btnSignupMouseClicked(java.awt.event.MouseEvent evt) {  
+       UserSignup signup = new UserSignup();
+        signup.setVisible(true);
+        this.setVisible(false);
     }
-}
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {  
-       
-        this.dispose();
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+     public static void main(String args[]) {
         FlatIntelliJLaf.setup();
+       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main_user().setVisible(true);
+                new UserLogin().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnClose;
     private swing.Button btnDashBoard;
+    private javax.swing.JLabel btnMinimize;
     private swing.Button btnSignIn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblClickHere;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblForgotPassword;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblUserLogin;
     private swing.PanelBorder panelBorder1;
     private swing.PanelGradiente panelGradiente1;
     private swing.PanelSlide slide;
     private swing.PanelSlide slidehover;
+    private javax.swing.JPanel titleBar;
     private swing.TextField txtEmail;
     private swing.PasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
-private boolean isMouseInside = false;
-private BufferedImage originalImage;
-private ImageIcon originalIcon;
-private ImageIcon blurredIcon;
-private javax.swing.JLabel jLabel4;
-
-
-}
+private javax.swing.JLabel btnSignup;}
